@@ -3,7 +3,10 @@
 require_once "Config/Database.php";
 class Asignatura
 {
-    private $pdo;
+	private $pdo;
+	public $id;
+	public $Asignatura;
+	
     public function __CONSTRUCT()
 	{
 		try
