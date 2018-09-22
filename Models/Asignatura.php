@@ -18,6 +18,10 @@ class Asignatura
 			die($e->getMessage());
 		}
 	}
+
+	public function Listar(){
+		
+	}
 }
 
 ?>
