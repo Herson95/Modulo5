@@ -38,7 +38,7 @@ class AsignaturaController
     public function Guardar()
     {
         $asig = new Asignatura();
-        $asig->AsignaturaID = $_REQUEST['AsignaturaID'];
+        $asig->AsignaturaID = $_REQUEST['id'];
         $asig->Asignatura = $_REQUEST['Asignatura'];
         $asig->UV = $_REQUEST['UV'];
 
