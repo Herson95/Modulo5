@@ -14,17 +14,22 @@
         </tr>
     </thead>
     <tbody>
-    <?php foreach($this->model->Listar() as $r): ?>
+        <?php foreach ($this->model->Listar() as $r): ?>
         <tr>
-            <td><?php echo $r->Aula; ?></td>
-            <td><?php echo $r->Capacidad; ?></td>
+            <td>
+                <?php echo $r->Aula; ?>
+            </td>
+            <td>
+                <?php echo $r->Capacidad; ?>
+            </td>
             <td>
                 <a class="btn btn-warning" href="?c=Aula&a=Crud&id=<?php echo $r->AulaID; ?>">Editar</a>
             </td>
             <td>
-                <a class="btn btn-danger" onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Aula&a=Eliminar&id=<?php echo $r->AulaID; ?>">Eliminar</a>
+                <a class="btn btn-danger" onclick="javascript:return confirm('¿Seguro de eliminar este registro?');"
+                    href="?c=Aula&a=Eliminar&id=<?php echo $r->AulaID; ?>">Eliminar</a>
             </td>
         </tr>
-    <?php endforeach; ?>
+        <?php endforeach;?>
     </tbody>
-</table> 
+</table>

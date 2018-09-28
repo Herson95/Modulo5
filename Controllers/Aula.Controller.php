@@ -2,49 +2,60 @@
 //Este controlador lo hara Cristina
 require_once 'Models/Aula.php';
 
-class AulaController{
-    
+class AulaController
+{
+
     private $model;
-    
-    public function __CONSTRUCT(){
+
+    public function __CONSTRUCT()
+    {
         $this->model = new Aula();
     }
 
-public function Index(){
-    require_once 'Views/header.php';
-    require_once 'Views/Aula/aula.php';
-    require_once 'Views/footer.php';
-}
+    public function Index()
+    {
+        session_start();
 
-public function Crud(){
-    $aul = new Aula();
-    if(isset($_REQUEST['AulaID'])){
-        $aul = $this->model->Obtener($_REQUEST['AulaID']);
+        require_once 'Views/Menu/menu.php';
+        require_once 'Views/header.php';
+        require_once 'Views/Aula/aula.php';
+        require_once 'Views/footer.php';
     }
-    require_once 'Views/header.php';
-    require_once 'Views/Aula/aula-editar.php';
-    require_once 'Views/footer.php';
-}
 
-public function Guardar(){
-    $aul = new Aula();        
-    $aul->AulaID = $_REQUEST['AulaID']; 
-    $aul->Aula = $_REQUEST['Aula'];
-    $aul->Capacidad = $_REQUEST['Capacidad'];
+    public function Crud()
+    {
+        $aul = new Aula();
+        if (isset($_REQUEST['id'])) {
+            $aul = $this->model->Obtener($_REQUEST['id']);
+        }
+        session_start();
 
-    $aul->AulaID > 0 
-            ? $this->model->Actualizar($aul)
-            : $this->model->Registrar($aul);
-        
-        header('Location: index.php');
+        require_once 'Views/Menu/menu.php';
+        require_once 'Views/header.php';
+        require_once 'Views/Aula/aula-editar.php';
+        require_once 'Views/footer.php';
+    }
 
-}
+    public function Guardar()
+    {
+        $aul = new Aula();
+        $aul->AulaID = $_REQUEST['id'];
+        $aul->Aula = $_REQUEST['Aula'];
+        $aul->Capacidad = $_REQUEST['Capacidad'];
 
-public function Eliminar(){
-        if(isset($_REQUEST['AulaID'])){
-            //echo $_REQUEST['id'];
-            $this->model->Eliminar($_REQUEST['AulaID']);
-            header('Location: index.php');
+        $aul->AulaID > 0
+        ? $this->model->Actualizar($aul)
+        : $this->model->Registrar($aul);
+
+        $this->Index();
+
+    }
+
+    public function Eliminar()
+    {
+        if (isset($_REQUEST['id'])) {
+            $this->model->Eliminar($_REQUEST['id']);
+            $this->Index();
         }
     }
 }

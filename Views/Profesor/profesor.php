@@ -1,4 +1,4 @@
-<h1 class="page-header">Porfesor</h1>
+<h1 class="page-header">Profesor</h1>
 
 <div class="well well-sm text-right">
     <a class="btn btn-primary" href="?c=Profesor&a=Crud">Nuevo profesor</a>
@@ -17,20 +17,30 @@
         </tr>
     </thead>
     <tbody>
-    <?php foreach($this->model->Listar() as $r): ?>
+        <?php foreach ($this->model->Listar() as $r): ?>
         <tr>
-            <td><?php echo $r->Nombre; ?></td>
-            <td><?php echo $r->Apellido; ?></td>
-            <td><?php echo $r->Dui; ?></td>
-            <td><?php echo $r->Telefono; ?></td>
-            <td><?php echo $r->Estado; ?></td>
             <td>
-                <a href="?c=Profesor&a=Crud&id=<?php echo $r->id; ?>">Editar</a>
+                <?php echo $r->Nombre; ?>
             </td>
             <td>
-                <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Profesor&a=Eliminar&id=<?php echo $r->id; ?>">Eliminar</a>
+                <?php echo $r->Apellido; ?>
+            </td>
+            <td>
+                <?php echo $r->Dui; ?>
+            </td>
+            <td>
+                <?php echo $r->Telefono; ?>
+            </td>
+            <td>
+                <?php echo $r->Estado; ?>
+            </td>
+            <td>
+                <a href="?c=Profesor&a=Crud&id=<?php echo $r->ProfesorID; ?>">Editar</a>
+            </td>
+            <td>
+                <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Profesor&a=Eliminar&id=<?php echo $r->ProfesorID; ?>">Eliminar</a>
             </td>
         </tr>
-    <?php endforeach; ?>
+        <?php endforeach;?>
     </tbody>
 </table>
