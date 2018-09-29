@@ -25,9 +25,9 @@ class Aula
         {
             $result = array();
 
-            $stm = $this->pdo->prepare("SELECT * FROM tbl_aulas");
+            $sql = 'CALL READ_AULA1()';
+            $stm = $this->pdo->prepare($sql);
             $stm->execute();
-
             return $stm->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
             die($e->getMessage());
@@ -38,10 +38,10 @@ class Aula
     {
         try
         {
-
-            $stm = $this->pdo->prepare("SELECT * FROM tbl_aulas WHERE AulaID = ?");
-            $stm->execute(array($AulaID));
-
+            $sql = ' CALL READ_AULA_ID(:AulaID)';
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam(':AulaID', $AulaID, PDO::PARAM_INT);
+            $stm->execute();
             return $stm->fetch(PDO::FETCH_OBJ);
         } catch (Exception $e) {
             die($e->getMessage());
@@ -52,8 +52,9 @@ class Aula
     {
         try
         {
-            $stm = $this->pdo->prepare("DELETE FROM tbl_aulas WHERE AulaID = ?");
-            $stm->execute(array($AulaID));
+            $sql = "CALL DELETE_AULA($AulaID)";
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute();
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -65,9 +66,9 @@ class Aula
 
         try
         {
-            //$sql = 'CALL update_aula(?,?,?)';
-            $sql = "UPDATE tbl_aulas SET Aula = ?, Capacidad =? WHERE AulaID = ?";
 
+            $sql = 'CALL UPDATE_AULA(?,?,?)';
+            
             $this->pdo->prepare($sql)
                 ->execute(
                     array(
@@ -86,7 +87,7 @@ class Aula
         try
         {
 
-            $sql = "INSERT INTO tbl_aulas (Aula, Capacidad) VALUE (?,?)";
+           $sql = 'CALL INSERT_AULA(?,?)';
             $this->pdo->prepare($sql)
                 ->execute(
                     array(
