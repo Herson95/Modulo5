@@ -25,7 +25,7 @@ class Aula
         {
             $result = array();
 
-            $sql = 'CALL READ_AULA1()';
+            $sql = 'CALL READ_AULA()';
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             return $stm->fetchAll(PDO::FETCH_OBJ);
