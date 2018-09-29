@@ -30,6 +30,7 @@ class AsignaturaController
             $asig = $this->model->Obtener($_REQUEST['AsignaturaID']);
         }
         session_start();
+        require_once 'Views/Menu/menu.php';
         require_once 'Views/header.php';
         require_once 'Views/Asignatura/asignatura-editar.php';
         require_once 'Views/footer.php';
