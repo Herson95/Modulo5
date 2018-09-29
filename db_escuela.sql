@@ -32,6 +32,9 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_ALUMNO` (IN `idpar` INT)  NO SQL
 DELETE FROM tbl_alumnos WHERE AlumnoID = idpar$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_ASIGNACION`(IN `idpar` INT) NO SQL
+DELETE FROM tbl_aulas_asignaturas WHERE RelacionID = idpar$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DELETE_ASIGNATURA` (IN `AsignaturaIDpar` INT)  NO SQL
 DELETE FROM tbl_asignaturas WHERE AsignaturaID = AsignaturaIDpar$$
 
@@ -46,6 +49,10 @@ DELETE FROM tbl_profesores WHERE ProfesorID = idpar$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_ALUMNO` (IN `Nombrepar` VARCHAR(50), IN `Apellidopar` VARCHAR(50), IN `Generopar` INT(1), IN `FechaNacimientopar` DATE, IN `Telefonopar` VARCHAR(9), IN `FechaRegistropar` DATE, IN `Estadopar` TINYINT(1))  NO SQL
 INSERT INTO tbl_alumnos (Nombre, Apellido, Genero, FechaNacimiento, Telefono, FechaRegistro, Estado) VALUES (Nombrepar, Apellidopar, Generopar, FechaNacimientopar, Telefonopar, FechaRegistropar, Estadopar)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_ASIGNACION`(IN `idhorapar` INT, IN `idasignaturapar` INT, IN `idaulapar` INT)
+    NO SQL
+INSERT INTO tbl_aulas_asignaturas (AulaID, AsignaturaID, HorarioID) VALUES (idaulapar, idasignaturapar, idhorapar)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_ASIGNATURA` (IN `Asignaturapar` VARCHAR(25), IN `UVpar` INT)  NO SQL
 INSERT INTO tbl_asignaturas (Asignatura, UV) 												VALUES 	(Asignaturapar, UVpar)$$
@@ -73,6 +80,21 @@ SELECT * FROM tbl_alumnos$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `READ_ALUMNO_ID` (IN `idpar` INT)  NO SQL
 SELECT * FROM tbl_alumnos WHERE AlumnoID = idpar$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `READ_ASIGNACION`()
+    NO SQL
+SELECT au.Aula, asi.Asignatura, ho.Hora_inicio, ho.Hora_fin FROM tbl_aulas_asignaturas 
+INNER JOIN tbl_aulas AS au ON tbl_aulas_asignaturas.AulaID = au.AulaID
+INNER JOIN tbl_asignaturas AS asi ON tbl_aulas_asignaturas.AsignaturaID = asi.AsignaturaID
+inner JOIN tbl_horarios AS ho ON tbl_aulas_asignaturas.HorarioID = ho.HorarioID$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `READ_ASIGNACION_ID`(IN `idrelacionpar` INT)
+    NO SQL
+SELECT au.Aula, asi.Asignatura, ho.Hora_inicio, ho.Hora_fin FROM tbl_aulas_asignaturas 
+INNER JOIN tbl_aulas AS au ON tbl_aulas_asignaturas.AulaID = au.AulaID
+INNER JOIN tbl_asignaturas AS asi ON tbl_aulas_asignaturas.AsignaturaID = asi.AsignaturaID
+inner JOIN tbl_horarios AS ho ON tbl_aulas_asignaturas.HorarioID = ho.HorarioID
+WHERE RelacionID = idrelacionpar$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `READ_ASIGNATURA` ()  NO SQL
 SELECT * FROM tbl_asignaturas$$
@@ -110,6 +132,13 @@ UPDATE tbl_alumnos SET	Nombre = Nombrepar,
                         FechaRegistro = FechaRegistropar,
                         Estado = Estadopar
                             WHERE AlumnoID = idpar$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_ASIGNACION`(IN `aulaidpar` INT, IN `asiganturaidpar` INT, IN `horarioidpar` INT, IN `relacionidpar` INT)
+    NO SQL
+UPDATE tbl_aulas_asignaturas SET	AulaID = aulaidpar, 
+						AsignaturaID = asiganturaidpar,
+                        HorarioID = horarioidpar
+                            WHERE RelacionID = relacionidpar$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_ASIGNATURA` (IN `Asignaturapar` VARCHAR(25), IN `UVpar` INT, IN `AsignaturaIDpar` INT)  NO SQL
 UPDATE tbl_asignaturas SET	Asignatura = Asignaturapar, 
