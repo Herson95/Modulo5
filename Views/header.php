@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>Anexsoft</title>
+    <title>Sistema Escolar</title>
 
     <meta charset="utf-8" />
 

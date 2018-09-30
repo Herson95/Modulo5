@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <hr />
         <footer class="text-center well">
-            <p>Ejemplo desarrollado por <a href="">Practicas</a></p>
+            <p>Ejemplo desarrollado por <a href="">Grupo 3</a></p>
         </footer>
     </div>
 </div>

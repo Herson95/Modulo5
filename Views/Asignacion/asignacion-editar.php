@@ -3,7 +3,7 @@
 </h1>
 
 <ol class="breadcrumb">
-    <li><a href="?c=Asignacion">Profesor</a></li>
+    <li><a href="?c=Asignacion">Asignacion</a></li>
     <li class="active">
         <?php echo $asignar->RelacionID != null ? $asignar->RelacionID : 'Nuevo Registro'; ?>
     </li>
@@ -45,7 +45,7 @@
             <select class="form-control" name="idrol" id="HorarioID">
                 <?php foreach ($this->model->ListarHorario() as $p): ?>
                 <option value="<?php echo $p->HorarioID; ?>">
-                    <?php echo $p->Hora_inicio; ?>
+                    <?php echo $p->HORARIO; ?>
                 </option>
                 <?php endforeach;?>
             </select>

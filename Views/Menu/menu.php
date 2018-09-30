@@ -8,7 +8,7 @@ if (!isset($_SESSION['Usuario'])) {
     header('Location:index.php');
 }
 include "BootstrapMenu.php";
-$str = '[ {"text":"' . "Usuario : " . $_SESSION['Usuario'] . '", "href":"#", "title": "Usuario"} , {"text":"Alumnos", "href": "?c=Alumno", "title": "Alumnos"}, {"text":"Aulas", "href": "?c=Aula", "title": "Aulas"}, {"text":"Profesores", "href": "?c=Profesor", "title": "Profesores"}, {"text":"Asignaturas", "href": "?c=Asignatura", "title": "Asignaturas"}, {"text":"Horarios", "href": "?c=Horario", "title": "Horarios"}, {"text":"Asignar Horarios", "href": "?c=AsignarHorario", "title": "Asignar Horarios"}, {"text":"Salir", "href": "?c=Login&a=Logout", "title": "Salir"}  ]';
+$str = '[ {"text":"' . "Usuario : " . $_SESSION['Usuario'] . '", "href":"#", "title": "Usuario"} , {"text":"Alumnos", "href": "?c=Alumno", "title": "Alumnos"}, {"text":"Aulas", "href": "?c=Aula", "title": "Aulas"}, {"text":"Profesores", "href": "?c=Profesor", "title": "Profesores"}, {"text":"Asignaturas", "href": "?c=Asignatura", "title": "Asignaturas"}, {"text":"Horarios", "href": "?c=Horario", "title": "Horarios"}, {"text":"Asignar Horarios", "href": "?c=Asignacion", "title": "Asignar Horarios"}, {"text":"Salir", "href": "?c=Login&a=Logout", "title": "Salir"}  ]';
 $qMenu = new BootstrapMenu(array('data' => $str));
 
 $menu = $qMenu->html();?>

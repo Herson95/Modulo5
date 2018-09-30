@@ -18,13 +18,13 @@
         <?php foreach ($this->model->Listar() as $r): ?>
         <tr>
             <td>
-                <?php echo $r->AulaID; ?>
+                <?php echo $r->AULA; ?>
             </td>
             <td>
-                <?php echo $r->AsignaturaID; ?>
+                <?php echo $r->ASIGNATURA; ?>
             </td>
             <td>
-                <?php echo $r->HorarioID; ?>
+                <?php echo $r->HORARIO; ?>
             </td>
             <td>
                 <a href="?c=Asignacion&a=Crud&RelacionID=<?php echo $r->RelacionID; ?>">Editar</a>

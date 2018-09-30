@@ -24,11 +24,11 @@ class Asignacion
     {
         try {
             $result = array();
-
             $sql = 'CALL READ_ASIGNACION()';
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             return $stm->fetchAll(PDO::FETCH_OBJ);
+
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -67,7 +67,7 @@ class Asignacion
         try {
             $result = array();
 
-            $sql = 'CALL READ_HORARIO()';
+            $sql = 'CALL READ_HORARIO_SELECT()';
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -76,12 +76,12 @@ class Asignacion
         }
     }
 
-    public function Obtener($AsignaturaID)
+    public function Obtener($RelacionID)
     {
         try {
-            $sql = ' CALL READ_ASIGNACION_ID(:AsignaturaID)';
+            $sql = ' CALL READ_ASIGNACION_ID(:RelacionID)';
             $stm = $this->pdo->prepare($sql);
-            $stm->bindParam(':AsignaturaID', $AsignaturaID, PDO::PARAM_INT);
+            $stm->bindParam(':RelacionID', $RelacionID, PDO::PARAM_INT);
             $stm->execute();
             return $stm->fetch(PDO::FETCH_OBJ);
         } catch (Exception $e) {
@@ -89,11 +89,11 @@ class Asignacion
         }
     }
 
-    public function Eliminar($AsignaturaID)
+    public function Eliminar($RelacionID)
     {
         try
         {
-            $sql = "CALL DELETE_ASIGNATURA($AsignaturaID)";
+            $sql = "CALL DELETE_ASIGNACION($RelacionID)";
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
         } catch (Exception $e) {
@@ -106,14 +106,15 @@ class Asignacion
         try
         {
 
-            $sql = 'CALL UPDATE_ASIGNATURA(?,?,?)';
+            $sql = 'CALL UPDATE_ASIGNACION(?,?,?,?)';
 
             $this->pdo->prepare($sql)
                 ->execute(
                     array(
-                        $data->Asignatura,
-                        $data->UV,
+                        $data->AulaID,
                         $data->AsignaturaID,
+                        $data->HorarioID,
+                        $data->RelacionID,
                     )
                 );
         } catch (Exception $e) {
@@ -121,16 +122,17 @@ class Asignacion
         }
     }
 
-    public function Registrar(Asignatura $data)
+    public function Registrar(Asignacion $data)
     {
         try
         {
-            $sql = 'CALL INSERT_ASIGNATURA(?,?)';
+            $sql = 'CALL INSERT_ASIGNACION(?,?,?)';
             $this->pdo->prepare($sql)
                 ->execute(
                     array(
-                        $data->Asignatura,
-                        $data->UV,
+                        $data->AulaID,
+                        $data->AsignaturaID,
+                        $data->HorarioID
                     )
                 );
         } catch (Exception $e) {
